@@ -1,24 +1,13 @@
 package com.igorjsantos.validator;
 
-import com.igorjsantos.exception.ValidationException;
-import com.igorjsantos.validator.IValidator;
+import com.igorjsantos.exception.RestrictionValidationException;
 
 /**
  * @author igorjsantos
  *
  */
-public class Validator {
+public interface Validator<T> {
 
-    private IValidator validator;
-
-    public Validator(IValidator validator)
-    {
-        this.validator=validator;
-    }
-
-    public boolean validate(Object o) throws ValidationException
-    {
-        return this.validator.validate(o);
-    }
-
+	void check(T arg) throws RestrictionValidationException;
+	
 }

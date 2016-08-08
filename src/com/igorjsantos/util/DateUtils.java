@@ -3,6 +3,7 @@ package com.igorjsantos.util;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * @author igorjsantos
@@ -10,30 +11,30 @@ import java.time.format.DateTimeFormatter;
  */
 public class DateUtils {
 
-	private static final DateTimeFormatter DEFAULT_LOCAL_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	private static final DateTimeFormatter DEFAULT_STRING_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMdd");
+	private static final String DEFAULT_DATE_FORMAT = "dd/MM/yyyy";
+	private static final String DEFAULT_CSV_DATE_FORMAT = "yyyyMMdd";	
+	private static final Locale LOCALE_BRAZIL = new Locale("pt","BR");
 	
-	private static final Long WORKING_DAYS = [DayOfWeek.MONDAY, DayofWee;/k]
-
-	public static LocalDate convertToLocalDateFormat(String date) {
-		return LocalDate.parse(date, DEFAULT_LOCAL_DATE_FORMAT);
-	}
-	
-	public static String convertToStringFormat(LocalDate date) {
-		return date.format(DEFAULT_STRING_DATE_FORMAT);
+	public static String toDataSourceDateFormat(LocalDate date) {
+		return date.format(DateTimeFormatter.ofPattern(DEFAULT_CSV_DATE_FORMAT, LOCALE_BRAZIL));
 	}
 
-	public static boolean isNonWorkingDay(LocalDate date) {
-		return date.getDayOfWeek().getValue() - DayOfWeek.FRIDAY.getValue() > 0;
+	public static LocalDate toLocalDateFormat(String date) {
+		return LocalDate.parse(date, DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT, LOCALE_BRAZIL));
 	}
 
-	public static LocalDate previousWorkingDay(LocalDate date) {
-		LocalDate previousDay = date.minusDays(1);
-		int decrementNonWorkinDays = previousDay.getDayOfWeek().getValue() - DayOfWeek.FRIDAY.getValue();
+	public static boolean isBussinesDay(LocalDate date) {
+		return (date.getDayOfWeek().getValue() >= DayOfWeek.MONDAY.getValue()
+				&& date.getDayOfWeek().getValue() <= DayOfWeek.FRIDAY.getValue());
+	}
 
-		if (decrementNonWorkinDays > 0) {
-			return previousDay.minusDays(decrementNonWorkinDays);
+	public static LocalDate getLastBussinesDay(LocalDate date) {
+		if (DayOfWeek.SATURDAY.equals(date.getDayOfWeek())) {
+			return date.minusDays(1);
 		}
-		return previousDay;
+		if (DayOfWeek.SUNDAY.equals(date.getDayOfWeek())) {
+			return date.minusDays(2);
+		}
+		return date;
 	}
 }
