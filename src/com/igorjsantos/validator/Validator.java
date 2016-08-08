@@ -1,6 +1,6 @@
 package com.igorjsantos.validator;
 
-import com.igorjsantos.exception.RestrictionValidationException;
+import com.igorjsantos.exception.ValidationException;
 
 /**
  * @author igorjsantos
@@ -8,6 +8,6 @@ import com.igorjsantos.exception.RestrictionValidationException;
  */
 public interface Validator<T> {
 
-	void check(T arg) throws RestrictionValidationException;
+	void check(T arg) throws ValidationException;
 	
 }

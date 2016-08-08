@@ -5,36 +5,36 @@ package com.igorjsantos.model.domain;
  *
  */
 public class Currency {
-	private final String currencyCode;
-	private final String currencyType;
-	private final String currencyName;
+	private final String code;
+	private final String type;
+	private final String name;
 	
-	public Currency(String currencyName) {
-		this.currencyCode = "";
-		this.currencyType = "";
-		this.currencyName = currencyName;
+	public Currency(String name) {
+		this.code = "";
+		this.type = "";
+		this.name = name;
 	}
 
-	public Currency(String currencyCode, String currencyType, String currencyName) {
-		this.currencyCode = currencyCode;
-		this.currencyType = currencyType;
-		this.currencyName = currencyName;
+	public Currency(String code, String type, String name) {
+		this.code = code;
+		this.type = type;
+		this.name = name;
 	}
 
-	public String getCurrencyCode() {
-		return currencyCode;
+	public String getCode() {
+		return code;
 	}
 	
-	public String getCurrencyType() {
-		return currencyType;
+	public String getType() {
+		return type;
 	}
 	
-	public String getCurrencyName() {
-		return currencyName;
+	public String getName() {
+		return name;
 	}
 	
 	@Override
 	public String toString() {
-		return String.format("%s - %s - %s", currencyCode, currencyType, currencyName);
+		return String.format("%s - %s - %s", code, type, name);
 	}
 }

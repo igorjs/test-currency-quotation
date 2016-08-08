@@ -1,22 +1,20 @@
 package com.igorjsantos.util;
 
-import java.util.logging.Logger;
-
-import com.igorjsantos.exception.RestrictionValidationException;
+import com.igorjsantos.exception.QuotationException;
 
 /**
  * @author igorjsantos
  *
  */
-public class LoggerUtils {
+public final class LoggerUtils {
 	
-	private static Logger logger = Logger.getAnonymousLogger();
+	private LoggerUtils() {}
 	
-	public static void logException(Exception e) {
-		logger.severe("Exception :: " + e.getMessage());
+	public static void log(Exception e) {
+		System.err.println("Exception :: " + e.getMessage());
 	}
 	
-	public static void logRestrictionValidationException(RestrictionValidationException e) {
-		logger.severe("RestrictionValidationException :: " + e.getMessage());
+	public static void log(QuotationException e) {
+		System.out.println(e.getClass().getSimpleName() + " :: " + e.getMessage());
 	}
 }

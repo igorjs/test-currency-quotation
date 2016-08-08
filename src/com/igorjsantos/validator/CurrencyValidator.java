@@ -1,7 +1,6 @@
 package com.igorjsantos.validator;
 
-import com.igorjsantos.exception.RestrictionValidationException;
-import com.igorjsantos.model.domain.Currency;
+import com.igorjsantos.exception.ValidationException;
 
 /**
  * @author igorjsantos
@@ -10,9 +9,9 @@ import com.igorjsantos.model.domain.Currency;
 public class CurrencyValidator implements Validator<String> {
 
 	@Override
-	public void check(String arg) throws RestrictionValidationException {
+	public void check(String arg) throws ValidationException {
 		if (arg == null || arg.isEmpty()) {
-			throw new RestrictionValidationException("Currency param is invalid!");
+			throw new ValidationException("Currency param is invalid!");
 		}
 	}
 	

@@ -34,7 +34,7 @@ public class DateUtils {
 		}
 		if (DayOfWeek.SUNDAY.equals(date.getDayOfWeek())) {
 			return date.minusDays(2);
-		}
+		}			
 		return date;
 	}
 }

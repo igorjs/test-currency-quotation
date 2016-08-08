@@ -3,8 +3,8 @@ package com.igorjsantos.service.impl;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import com.igorjsantos.exception.QuotationUnavailableException;
-import com.igorjsantos.exception.RestrictionValidationException;
+import com.igorjsantos.exception.QuotationException;
+import com.igorjsantos.exception.ValidationException;
 import com.igorjsantos.model.dao.QuotationDAO;
 import com.igorjsantos.model.dao.impl.QuotationDAOImpl;
 import com.igorjsantos.model.domain.Quotation;
@@ -23,7 +23,7 @@ public class QuotationServiceFacadeImpl implements QuotationServiceFacade {
 	}
 	
 	@Override
-	public BigDecimal currencyQuotation(String from, String to, Number value, String quotation) throws RestrictionValidationException, QuotationUnavailableException {
+	public BigDecimal currencyQuotation(String from, String to, Number value, String quotation) throws QuotationException, Exception {
 		
 		validate(from, to, value, quotation);
 
@@ -35,7 +35,7 @@ public class QuotationServiceFacadeImpl implements QuotationServiceFacade {
 		return calculate(value, fromQuotation, toQuotation);
 	}
 	
-	private static void validate(String from, String to, Number value, String quotation) throws RestrictionValidationException {
+	private static void validate(String from, String to, Number value, String quotation) throws ValidationException {
 		new CurrencyValidator().check(from);
 		new CurrencyValidator().check(to);
 		new ValueValidator().check(value);
